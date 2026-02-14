@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Surprise</title>
+  <link rel="stylesheet" href="Styless.css">
+</head>
+<body>
+
+  <audio id="miaudio" loop>
+    <source src="imagenes/MusSa.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+<div id="countdown-container">
+  <div class="contador-box">
+    <div id="countdown">00d 00h 00m 00s</div>
+  </div>
+  <p class="instruccion">Haz clic para activar la música y comenzar la sorpresa 🎵</p>
+</div>
+
+
+  <div class="cortina left"></div>
+  <div class="cortina right"></div>
+<div id="escenario" style="display:none;">
+  
+  <div class="seccion-texto">
+    <h1 class="nombre-persona">Jared</h1>
+    <h2 class="mensaje-dia">¡Feliz día del amor y la amistad a mi hermanito a quien le acomode un codigo para hoy! 🌟</h2>
+  </div>
+
+  <div class="contenedor-tarjetas">
+    
+    <div class="card-container">
+      <div class="inner" onclick="this.classList.toggle('flip')">
+        <div class="front"><img src="imagenes/lir1.jpg" alt="Lirio"></div>
+        <div class="back">Podremos no compartir sangre pero eso no te hace menos mi hermanito.</div>
+      </div>
+    </div>
+    
+    <div class="card-container">
+      <div class="inner" onclick="this.classList.toggle('flip')">
+        <div class="front"><img src="imagenes/lir4.jpg" alt="Lirio"></div>
+        <div class="back">Siempre estare para escucharte hablar de tus gustos, tu sentimientos y tu día sin juzgarte.</div>
+      </div>
+    </div>
+
+    <div class="card-container">
+      <div class="inner" onclick="this.classList.toggle('flip')">
+        <div class="front"><img src="imagenes/lir3.jpg" alt="Lirio"></div>
+        <div class="back">Pequeño nutriolis que tengas buen día peque.</div>
+      </div>
+    </div>
+
+    <div class="card-container">
+      <div class="inner" onclick="this.classList.toggle('flip')">
+        <div class="front"><img src="imagenes/lir2.jpg" alt="Lirio"></div>
+        <div class="back">Mi hermanito/amigo por siempre.</div>
+      </div>
+    </div>
+    
+<div class="card-container especial-oc">
+  <div class="inner" onclick="this.classList.toggle('flip')">
+    <div class="front"><img src="imagenes/lir5.jpg" alt="Evanthis"></div>
+    <div class="back">Cailo: Amor mío, si fueras una rosa todos envidiarían tu belleza.💙</div>
+  </div>
+</div>
+
+<div class="card-container especial-oc">
+  <div class="inner" onclick="this.classList.toggle('flip')">
+    <div class="front"><img src="imagenes/lir6.jpg" alt="Cailo"></div>
+    <div class="back">Cailo: me dijeron piensa en algo bonito y me acorde cundo nos conocimos por primera vez 💙</div>
+  </div>
+</div>
+ 
+
+  </div>
+
+
+  <script>
+    // Manejo de Audio al primer clic
+    document.addEventListener("click", function() {
+      const audio = document.getElementById("miaudio");
+      audio.play().catch(() => console.log("Audio esperando..."));
+    }, { once: true });
+    
+    // Pausar música si el usuario cambia de pestaña o sale de la página
+document.addEventListener("visibilitychange", function() {
+  const audio = document.getElementById("miaudio");
+  if (document.hidden) {
+    audio.pause();
+  } else {
+     Opcional: audio.play();  
+  }
+});
+
+// Asegurar que se detenga al cerrar totalmente
+
+
+    // Lógica del contador y apertura
+    function actualizar() {
+      // FECHA DE PRUEBA: Si quieres ver el resultado ya, 
+      // cambia la fecha a una que ya haya pasado.
+      const objetivo = new Date("Feb 14, 2026 00:31:00").getTime();
+      const ahora = new Date().getTime();
+      const diff = objetivo - ahora;
+
+      if (diff <= 0) {
+        document.querySelector('.cortina.left').classList.add('open-left');
+        document.querySelector('.cortina.right').classList.add('open-right');
+        setTimeout(() => {
+          document.getElementById("escenario").style.display = "flex";
+          document.getElementById("countdown-container").style.display = "none";
+        }, 1000);
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML = `${d}d ${h}h ${m}m ${s}s 💕`;
+    }
+    setInterval(actualizar, 1000);
+  </script>
+</body>
+</html>
